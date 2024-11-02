@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HỆ THỐNG GIÁM SÁT NHÀ KÍNH TỪ XA</title>
+    <link rel="stylesheet" href="styles.css">
+    <script src="scripts.js"></script>
+</head>
+<body>
+    <div class="header">
+        <h1>HỆ THỐNG GIÁM SÁT ĐỒNG HỒ TỪ XA</h1>
+    </div>
+    <!-- Thanh bar chọn đồng hồ-->
+    <div class="navbar">
+        <select id="search-dropdown">
+            <option value="all">Tất cả</option>
+            <option value="image1">ĐỒNG HỒ 1</option>
+            <option value="image2">ĐỒNG HỒ 2</option>
+            <option value="image3">ĐỒNG HỒ 3</option>
+        </select>
+    </div>
+    <div class="container">
+        <div class="product">
+            <div class="time-container">
+                <span id="time"><i>Time:</i></span>
+                <div id="current-time"></div>
+            </div>
+            <img id="image1" alt="Firebase Image">
+            <h2>ĐỒNG HỒ 1</h2>
+            <p><i>( Cập nhật lần cuối: <span id="last-updated1"></span> )</i></p>
+            <p><i>Vị trí: Kho A</i></p>
+            <p class="link">(Firebase)</p>
+            <button class="detail-btn" data-modal="myModal1">Chi tiết</button>
+        </div>
+        <div class="product">
+            <div class="time-container">
+                <span id="time"><i>Time:</i></span>
+                <div id="current-time"></div>
+            </div>
+            <img id="image2" alt="Firebase Image">
+            <h2>ĐỒNG HỒ 2</h2>
+            <p><i>( Cập nhật lần cuối: <span id="last-updated2"></span> )</i></p>
+            <p><i>Vị trí: Kho B</i></p>
+            <p class="link">(Firebase)</p>
+            <button class="detail-btn" data-modal="myModal2">Chi tiết</button>
+        </div>
+        <div class="product">
+            <div class="time-container">
+                <span id="time"><i>Time:</i></span>
+                <div id="current-time"></div>
+            </div>
+            <img id="image3" alt="Firebase Image">
+            <h2>ĐỒNG HỒ 3</h2>
+            <p><i>( Cập nhật lần cuối: <span id="last-updated3"></span> )</i></p>
+            <p><i>Vị trí: Kho C</i></p>
+            <p class="link">(Firebase)</p>
+            <button class="detail-btn" data-modal="myModal3">Chi tiết</button>
+        </div>
+    </div>
+    <div id="myModal1" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <h2 class="modal-title">ĐỒNG HỒ 1</h2>
+            <p style="text-align: center; font-size:30px; margin-top:0px;"><i>( Cập nhật lần cuối: <span id="last-updated1-modal"></span> )</i></p>
+            <div class="modal-body">
+                <img id="image1-modal" alt="Firebase Image" class="modal-image">
+                <div class="modal-info">
+                    <p><i>Vị trí: Kho A</i></p>
+                    <div class="nda">
+                            <div id="dongho1-data"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <div id="myModal2" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <h2 class="modal-title">ĐỒNG HỒ 2</h2>
+            <p style="text-align: center; font-size:30px; margin-top:0px;"><i>( Cập nhật lần cuối: <span id="last-updated2-modal"></span> )</i></p>
+            <div class="modal-body">
+                <img id="image2-modal" alt="Firebase Image" class="modal-image">
+                <div class="modal-info">
+                    <p><i>Vị trí: Kho A</i></p>
+                    <div class="nda">
+                        <div id="dongho2-data"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div id="myModal3" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <h2 class="modal-title">ĐỒNG HỒ 3</h2>
+            <p style="text-align: center; font-size:30px; margin-top:0px;"><i>( Cập nhật lần cuối: <span id="last-updated3-modal"></span> )</i></p>
+            <div class="modal-body">
+                <img id="image3-modal" alt="Firebase Image" class="modal-image">
+                <div class="modal-info">
+                    <p><i>Vị trí: Kho A</i></p>
+                    <div class="nda">
+                        <div id="dongho3-data"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <br><br><br>
+    <div class="footer">
+        <h1>Nhóm 4:</h1>
+        <p>NGUYỄN ĐÌNH TÚ</p>
+        <p>HUỲNH CÔNG THANH</p>
+        <p>LÊ BÙI TUẤN ANH</p>
+        <p>VŨ XUÂN AN</p>
+    </div>
+</body>
+<script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.13.1/firebase-app.js";
+    import { getDatabase,ref as databaseref, onValue } from "https://www.gstatic.com/firebasejs/10.13.1/firebase-database.js";
+    import { getStorage, ref, getDownloadURL} from "https://www.gstatic.com/firebasejs/10.13.1/firebase-storage.js";
+    const firebaseConfig = {
+        apiKey: "AIzaSyCdrB_ksv5BgojNJEWc67UsZ2vBjg3NRTQ",
+        authDomain: "thuctapiot-53e65.firebaseapp.com",
+        databaseURL: "https://thuctapiot-53e65-default-rtdb.firebaseio.com",
+        projectId: "thuctapiot-53e65",
+        storageBucket: "thuctapiot-53e65.appspot.com",
+        messagingSenderId: "781186585997",
+        appId: "1:781186585997:web:735b021837379d3d8a59c4",
+        measurementId: "G-26V0XRSB76"
+      };
+    const app = initializeApp(firebaseConfig);
+    const storage = getStorage(app);
+    const database = getDatabase(app);
+    // Hàm lấy dữ liệu từ nhiều child trong Realtime Database
+
+    // Hàm lấy ref hình và hiển thị từ Firebase
+    async function displayImage(imagePath, imgElementId) {
+        const imageRef = ref(storage, imagePath);
+        try {
+            const url = await getDownloadURL(imageRef);
+            document.getElementById(imgElementId).src = url;
+            updateLastUpdatedTime();
+        } catch (error) {
+            console.error('Error fetching image URL:', error);
+        }
+    }
+        // Gọi hàm display để lấy hình và hiển thị lên web từ Firebase
+        displayImage('clock1.jpg', 'image1');
+        displayImage('clock2.jpg', 'image2');
+        displayImage('clock3.jpg', 'image3');
+        displayImage('clock1.jpg', 'image1-modal');
+        displayImage('clock2.jpg', 'image2-modal');
+        displayImage('clock3.jpg', 'image3-modal');
+
+    function fetchData() {
+        const dbRef = databaseref(database);
+    
+        onValue(databaseref(database, 'clock1'), (snapshot) => {
+            const data = snapshot.val();
+            displayData('dongho1-data', data);
+        }, {
+            onlyOnce: true
+        });
+    
+        onValue(databaseref(database, 'clock2'), (snapshot) => {
+            const data = snapshot.val();
+            displayData('dongho2-data', data);
+        }, {
+            onlyOnce: true
+        });
+    
+        onValue(databaseref(database, 'clock3'), (snapshot) => {
+            const data = snapshot.val();
+            displayData('dongho3-data', data);
+        }, {
+            onlyOnce: true
+        });
+    }
+    
+    function displayData(elementId, data) {
+        const dataContainer = document.getElementById(elementId);
+        if (dataContainer) {
+            dataContainer.innerHTML = `
+                <div class="card">
+                    <p>Nhiệt độ: ${data.Nhietdo}</p>
+                    <p>Độ ẩm: ${data.Doam}</p>
+                </div>
+            `;
+        }
+    }
+    
+    document.addEventListener('DOMContentLoaded', fetchData);
+    // Hàm cập nhật và đếm đồng hồ thời gian, cập nhập mỗi 100s
+    function updateTime() {
+        const now = new Date();
+        const timeString = now.toLocaleTimeString();
+        document.querySelectorAll('#current-time').forEach(el => el.textContent = timeString);
+    }
+    setInterval(updateTime, 1000);
+    updateTime();
+    // Thêm thanh bar chọn đồng hồ
+    document.getElementById('search-dropdown').addEventListener('change', function() {
+        const selectedValue = this.value;
+        const products = document.querySelectorAll('.product');
+        products.forEach(product => {
+            if (selectedValue === 'all') {
+                product.style.display = 'block';
+            } else {
+                product.style.display = product.querySelector(`#${selectedValue}`) ? 'block' : 'none';
+            }
+        });
+        if (selectedValue !== 'all') {
+            const selectedProduct = document.querySelector(`#${selectedValue}`).closest('.product');
+            selectedProduct.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        }
+    });
+    // Hàm cập nhật thời gian lần cuối
+    function updateLastUpdatedTime() {
+        const now = new Date();
+        const lastUpdatedTime = now.toLocaleString();
+        document.getElementById('last-updated1').textContent = lastUpdatedTime;
+        document.getElementById('last-updated2').textContent = lastUpdatedTime;
+        document.getElementById('last-updated3').textContent = lastUpdatedTime;
+        document.getElementById('last-updated1-modal').textContent = lastUpdatedTime;
+        document.getElementById('last-updated2-modal').textContent = lastUpdatedTime;
+        document.getElementById('last-updated3-modal').textContent = lastUpdatedTime;
+    }
+  // Gọi hàm này khi trang được tải
+  window.addEventListener('load', () => {
+    updateLastUpdatedTime(); // Cập nhật ngay khi trang được tải
+});
+</script>
+</html>

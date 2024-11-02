@@ -1,0 +1,205 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-image: url("hinh3.png");
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+.header {
+    background-image: url("hinh5.avif");
+    background-repeat: no-repeat;
+    background-size: cover;
+    color: black;
+    font-size: 10px;
+    text-shadow: -1px 0 white, 0 1px white, 1px 0 white, 0 -1px white;
+    padding: 1px 0;
+    text-align: center;
+    box-shadow: 10px 10px 10px 1px whitesmoke;
+}
+
+.container {  
+    width: 100%;
+    margin: auto;
+    overflow: hidden;
+    content: "";
+    display: flex;
+    clear: both; 
+}
+.product {
+    float: left;
+    width: 25%;
+    background: #fff;
+    margin: 30px;
+    padding: 20px;
+    border: 1px solid lightblue;
+    border-radius: 50px;
+    text-align: center;
+    transition: all 0.3s ease;
+}
+.card {
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    padding: 10px;
+    margin: 100px;
+    box-shadow: 2px 2px 5px rgba(0,0,0,0.1);
+}
+.product:hover{
+    background: lightblue;
+    transform: scale(1.1);
+}
+.product img {
+    max-width: 100%;
+    height: 200px;
+    border-radius: 10px;
+}
+.product h2 {
+    margin: 10px 0;
+}
+.product p {
+    margin: 10px 0;
+}
+.product .link {
+    color: #b12704;
+    font-size: 1.2em;
+}
+.product button {
+    display: inline-block;
+    margin-top: 10px;
+    padding: 10px 20px;
+    background: black;
+    color: #fff;
+    text-decoration: none;
+    border-radius: 10px;
+}
+.product button:hover {
+    background: tomato;
+    border: #fff;
+}
+.time-container {
+    display: flex;
+    align-items: left;
+    text-align: left;
+    font-style: italic;
+}
+.time {
+    font-style: italic;
+}
+.navbar {
+    overflow: hidden;
+    background-color: #333;
+}
+
+.navbar a {
+    float: left;
+    display: block;
+    color: #f2f2f2;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+    font-size: 17px;
+}
+
+.navbar a:hover {
+    background-color: #ddd;
+    color: black;
+}
+
+.navbar select {
+    float: right;
+    padding: 6px;
+    margin-top: 8px;
+    margin-right: 500px;
+    margin-bottom: 8px;
+    border: none;
+    font-size: 17px;
+    width: 30%;
+    text-align: center;
+}
+.footer {
+    background-image: url("hinh8.jpg");
+    width: 100%;
+    height: 200px;
+    border:1px solid black;
+    border-radius: 1%;
+    font-family: 'Times New Roman';
+    color: black;
+    text-align: left;
+}
+.footer h1{
+    font-size: 20px;
+    margin: 10px;
+    padding-left: 10px;
+    padding-top: 5px;
+}
+.footer p{
+    font-size: 15px;
+    padding-left: 20px;
+}
+.modal {
+    display: none; 
+    position: fixed; 
+    align-items: center;
+    z-index: 1; 
+    left: 0;
+    top: 0;
+    width: 100%; 
+    height: 100%; 
+    overflow: auto; 
+    background-color: rgb(0,0,0); 
+    background-color: rgba(0,0,0,0.4); 
+}
+
+.modal-content {
+    background-color: #fefefe;
+    align-items: center;
+    margin: 10% auto; 
+    padding: 10px;
+    border: 1px solid #888;
+    width: 90%; 
+    border-radius: 10px;
+}
+
+.close {
+    color: #aaa;
+    float: right;
+    font-size: 40px;
+    font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+    color: red;
+    text-decoration: none;
+    cursor: pointer;
+}
+.modal-body {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.modal-title {
+    text-align: center;
+    width: 100%;
+    font-size: 50px;
+}
+
+.modal-image {
+    width: 300px 300px;
+    max-width: 300px;
+    margin: 40px;
+    border-image: 5px solid black;
+    border-radius: 10px;
+}
+
+.modal-info {
+    flex: 1;
+    text-align: center;
+    font-size: 30px;
+}
+.nda{
+    flex: 1;
+    text-align: center;
+}
+
